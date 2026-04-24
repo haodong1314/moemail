@@ -50,11 +50,20 @@ async function migrate() {
 
     // Generate migrations
     console.log('Generating migrations...')
-    await execAsync('drizzle-kit generate --schema ./app/lib/schema.ts --dialect sqlite --out ./drizzle')
+    await execAsync('drizzle-kit generate --schema ./app/lib/schema.ts --dialect sqlite --out ./drizzle', { 
+      cwd: process.cwd(),
+      shell: true
+    })
     
     // Applying migrations
     console.log(`Applying migrations to ${mode} database: ${dbName}`)
-    await execAsync(`wrangler d1 migrations apply ${dbName} --${mode} --migrations-dir ./drizzle`, { shell: true, cwd: process.cwd() })
+    const migrateCommand = `wrangler d1 migrations apply ${dbName} --${mode} --migrations-dir ./drizzle`
+    console.log(`Running command: ${migrateCommand}`)
+    await execAsync(migrateCommand, { 
+      cwd: process.cwd(),
+      shell: true
+    })
+
     console.log('Migration completed successfully!')
   } catch (error) {
     console.error('Migration failed:', error)
