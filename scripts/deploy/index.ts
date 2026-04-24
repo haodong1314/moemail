@@ -75,9 +75,6 @@ const setupConfigFile = (examplePath: string, targetPath: string) => {
       json.d1_databases[0].database_name = DATABASE_NAME;
       json.d1_databases[0].migrations_dir = "./drizzle";
     }
-    
-    // 添加全局 migrations_dir 配置
-    json.migrations_dir = "./drizzle";
 
     // 写入配置文件
     writeFileSync(targetPath, JSON.stringify(json, null, 2));
@@ -132,8 +129,6 @@ const updateDatabaseConfig = (dbId: string) => {
         json.d1_databases[0].database_id = dbId;
         json.d1_databases[0].migrations_dir = "./drizzle";
       }
-      // 确保全局 migrations_dir 配置存在
-      json.migrations_dir = "./drizzle";
       writeFileSync(configPath, JSON.stringify(json, null, 2));
       console.log(`✅ Updated database ID in ${filename}`);
     } catch (error) {
@@ -323,7 +318,7 @@ const pushPagesSecret = () => {
       let value = trimmedLine.substring(equalIndex + 1).trim();
       
       // 移除引号
-      value = value.replace(/^["']|["']$/g, '');
+      value = value.replace(/^['"]|['"]$/g, '');
       
       // 只保留运行时所需的环境变量，且值不为空
       if (runtimeEnvVars.includes(key) && value.length > 0) {
@@ -434,7 +429,7 @@ const setupEnvFile = () => {
       for (const match of envVarMatches) {
         const varName = match.split("=")[0].trim();
         if (process.env[varName]) {
-          const regex = new RegExp(`${varName}\\s*=\\s*".*?"`, "g");
+          const regex = new RegExp(`${varName}\s*=\s*".*?"`, "g");
           envContent = envContent.replace(regex, `${varName} = "${process.env[varName]}"`);
         }
       }
@@ -464,7 +459,7 @@ const updateEnvVar = (name: string, value: string) => {
   }
 
   let envContent = readFileSync(envFilePath, "utf-8");
-  const regex = new RegExp(`^${name}\\s*=\\s*".*?"`, "m");
+  const regex = new RegExp(`^${name}\s*=\s*".*?"`, "m");
 
   if (envContent.match(regex)) {
     envContent = envContent.replace(regex, `${name} = "${value}"`);
