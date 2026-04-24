@@ -73,7 +73,11 @@ const setupConfigFile = (examplePath: string, targetPath: string) => {
     // 处理数据库配置
     if (json.d1_databases && json.d1_databases.length > 0) {
       json.d1_databases[0].database_name = DATABASE_NAME;
+      json.d1_databases[0].migrations_dir = "./drizzle";
     }
+    
+    // 添加全局 migrations_dir 配置
+    json.migrations_dir = "./drizzle";
 
     // 写入配置文件
     writeFileSync(targetPath, JSON.stringify(json, null, 2));
@@ -126,7 +130,10 @@ const updateDatabaseConfig = (dbId: string) => {
       const json = JSON.parse(readFileSync(configPath, "utf-8"));
       if (json.d1_databases && json.d1_databases.length > 0) {
         json.d1_databases[0].database_id = dbId;
+        json.d1_databases[0].migrations_dir = "./drizzle";
       }
+      // 确保全局 migrations_dir 配置存在
+      json.migrations_dir = "./drizzle";
       writeFileSync(configPath, JSON.stringify(json, null, 2));
       console.log(`✅ Updated database ID in ${filename}`);
     } catch (error) {
