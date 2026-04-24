@@ -1,4 +1,4 @@
-import { readFileSync, existsSync, mkdirSync } from 'fs'
+import { readFileSync } from 'fs'
 import { exec } from 'child_process'
 import { promisify } from 'util'
 import { join } from 'path'
@@ -32,6 +32,7 @@ async function migrate() {
     
     try {
       wranglerContent = readFileSync(wranglerPath, 'utf-8')
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       console.error('Error: wrangler.json not found')
       process.exit(1)
@@ -47,24 +48,15 @@ async function migrate() {
 
     const dbName = config.d1_databases[0].database_name
 
-    // Create drizzle directory if it doesn't exist
-    const drizzleDir = join(process.cwd(), 'drizzle')
-    if (!existsSync(drizzleDir)) {
-      console.log('Creating drizzle directory...')
-      mkdirSync(drizzleDir, { recursive: true })
-    }
-
     // Generate migrations
     console.log('Generating migrations...')
-    const generateCmd = 'drizzle-kit generate --schema ./app/lib/schema.ts --dialect sqlite --out ./drizzle'
-    console.log(`Running: ${generateCmd}`)
-    await execAsync(generateCmd, { cwd: process.cwd() })
+    await execAsync('drizzle-kit generate --out ./drizzle')
     
     // Applying migrations
     console.log(`Applying migrations to ${mode} database: ${dbName}`)
-    const migrateCmd = `wrangler d1 migrations apply ${dbName} --${mode} --migrations-dir ./drizzle`
-    console.log(`Running: ${migrateCmd}`)
-    await execAsync(migrateCmd, { cwd: process.cwd() })
+    const migrateCmd = `wrangler d1 migrations apply ${dbName.trim()} --${mode} --migrations-dir ./drizzle`
+    console.log(`Running command: ${migrateCmd}`)
+    await execAsync(migrateCmd, { shell: true })
 
     console.log('Migration completed successfully!')
   } catch (error) {
