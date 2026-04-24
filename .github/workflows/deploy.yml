@@ -9,6 +9,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true  # 添加此环境变量以使用 Node.js 24
     steps:
       - uses: actions/checkout@v4
         with:
@@ -29,7 +31,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'  # 将 Node.js 版本从 20 改为 24
           cache: 'pnpm'
 
       - name: Install Dependencies
