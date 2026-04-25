@@ -5,7 +5,7 @@ import { NextResponse } from "next/server"
 import { getUserId } from "@/lib/apiKey"
 import { nanoid } from "nanoid"
 
-export const runtime = "edge"
+
 
 // 获取邮箱的所有分享链接
 export async function GET(
