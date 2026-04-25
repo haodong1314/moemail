@@ -1,6 +1,3 @@
-// 👇 强制添加这两行
-export const dynamic = "force-dynamic";
-export const runtime = "edge";
 import { createDb } from "@/lib/db"
 import { and, eq, gt, lt, or, sql } from "drizzle-orm"
 import { NextResponse } from "next/server"
