@@ -1,6 +1,7 @@
-import { readFileSync } from 'fs'
+import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, copyFileSync } from 'fs'
 import { exec } from 'child_process'
 import { promisify } from 'util'
+import { join } from 'path'
 import 'dotenv/config'
 
 const execAsync = promisify(exec)
@@ -23,9 +24,27 @@ async function migrate() {
     console.log('Generating migrations...')
     await execAsync('drizzle-kit generate --schema ./app/lib/schema.ts --dialect sqlite --out drizzle')
     
+    // Create migrations directory and copy files from drizzle directory
+    const migrationsDir = join(process.cwd(), 'migrations')
+    const drizzleDir = join(process.cwd(), 'drizzle')
+    
+    if (!existsSync(migrationsDir)) {
+      mkdirSync(migrationsDir, { recursive: true })
+    }
+    
+    // Copy migration files
+    const files = readdirSync(drizzleDir)
+    for (const file of files) {
+      if (file.endsWith('.sql')) {
+        const source = join(drizzleDir, file)
+        const destination = join(migrationsDir, file)
+        copyFileSync(source, destination)
+      }
+    }
+    
     // Applying migrations
     console.log(`Applying migrations to ${mode} database: ${dbName}`)
-    await execAsync(`wrangler d1 migrations apply ${dbName.trim()} --${mode.trim()} --migrations-dir drizzle`)
+    await execAsync(`wrangler d1 migrations apply ${dbName.trim()} --${mode.trim()}`)
 
     console.log('Migration completed successfully!')
   } catch (error) {
