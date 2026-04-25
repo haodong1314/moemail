@@ -10,8 +10,6 @@ import { getUserId } from "@/lib/apiKey"
 import { getUserRole } from "@/lib/auth"
 import { ROLES } from "@/lib/permissions"
 
-export const runtime = "edge"
-
 export async function POST(request: Request) {
   const db = createDb()
   const env = getRequestContext().env
