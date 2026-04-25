@@ -25,7 +25,7 @@ const nextConfig = {
       }
     ],
   },
-  // 确保输出目录正确
+  // 确保与 Cloudflare Pages 兼容
   output: 'export',
   // 禁用静态导出的 trailingSlash
   trailingSlash: false,
