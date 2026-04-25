@@ -1,3 +1,5 @@
+export const runtime = 'edge';
+
 import { callWebhook } from "@/lib/webhook"
 import { WEBHOOK_CONFIG } from "@/config"
 import { z } from "zod"

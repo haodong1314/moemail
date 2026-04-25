@@ -1,3 +1,5 @@
+export const runtime = 'edge';
+
 import { auth } from "@/lib/auth"
 import { createDb } from "@/lib/db"
 import { apiKeys } from "@/lib/schema"

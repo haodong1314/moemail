@@ -1,3 +1,5 @@
+export const runtime = 'edge';
+
 import { auth, assignRoleToUser } from "@/lib/auth";
 import { createDb } from "@/lib/db";
 import { roles, userRoles } from "@/lib/schema";

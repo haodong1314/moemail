@@ -1,3 +1,5 @@
+export const runtime = 'edge';
+
 import { createDb } from "@/lib/db"
 import { emailShares, emails } from "@/lib/schema"
 import { eq, and } from "drizzle-orm"

@@ -1,0 +1,26 @@
+ app/api/api-keys/[id]/route.ts                                    | 2 [32m++[m
+ app/api/api-keys/route.ts                                         | 2 [32m++[m
+ app/api/auth/[...auth]/route.ts                                   | 2 [32m++[m
+ app/api/auth/register/route.ts                                    | 2 [32m++[m
+ app/api/config/email-service/route.ts                             | 2 [32m++[m
+ app/api/config/route.ts                                           | 2 [32m++[m
+ app/api/emails/[id]/[messageId]/route.ts                          | 2 [32m++[m
+ app/api/emails/[id]/messages/[messageId]/share/[shareId]/route.ts | 2 [32m++[m
+ app/api/emails/[id]/messages/[messageId]/share/route.ts           | 2 [32m++[m
+ app/api/emails/[id]/route.ts                                      | 2 [32m++[m
+ app/api/emails/[id]/send/route.ts                                 | 2 [32m++[m
+ app/api/emails/[id]/share/[shareId]/route.ts                      | 2 [32m++[m
+ app/api/emails/[id]/share/route.ts                                | 2 [32m++[m
+ app/api/emails/generate/route.ts                                  | 2 [32m++[m
+ app/api/emails/route.ts                                           | 2 [32m++[m
+ app/api/emails/send-permission/route.ts                           | 2 [32m++[m
+ app/api/roles/init-emperor/route.ts                               | 2 [32m++[m
+ app/api/roles/promote/route.ts                                    | 2 [32m++[m
+ app/api/roles/users/route.ts                                      | 2 [32m++[m
+ app/api/shared/[token]/messages/[messageId]/route.ts              | 2 [32m++[m
+ app/api/shared/[token]/messages/route.ts                          | 2 [32m++[m
+ app/api/shared/[token]/route.ts                                   | 2 [32m++[m
+ app/api/shared/message/[token]/route.ts                           | 2 [32m++[m
+ app/api/webhook/route.ts                                          | 2 [32m++[m
+ app/api/webhook/test/route.ts                                     | 2 [32m++[m
+ 25 files changed, 50 insertions(+)

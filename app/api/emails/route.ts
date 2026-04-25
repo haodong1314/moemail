@@ -1,3 +1,5 @@
+export const runtime = 'edge';
+
 import { createDb } from "@/lib/db"
 import { and, eq, gt, lt, or, sql } from "drizzle-orm"
 import { NextResponse } from "next/server"
