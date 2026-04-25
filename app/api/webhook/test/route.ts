@@ -3,7 +3,7 @@ import { WEBHOOK_CONFIG } from "@/config"
 import { z } from "zod"
 import { EmailMessage } from "@/lib/webhook"
 
-export const runtime = "edge"
+
 
 const testSchema = z.object({
   url: z.string().url()
