@@ -25,7 +25,7 @@ async function migrate() {
     
     // Applying migrations
     console.log(`Applying migrations to ${mode} database: ${dbName}`)
-    await execAsync(`wrangler d1 migrations apply ${dbName} --${mode}`)
+    await execAsync(`wrangler d1 migrations apply ${dbName.trim()} --${mode.trim()} --migrations-dir drizzle`)
 
     console.log('Migration completed successfully!')
   } catch (error) {
