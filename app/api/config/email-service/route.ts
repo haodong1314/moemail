@@ -1,13 +1,8 @@
-// 👇 强制添加这两行
-export const dynamic = "force-dynamic";
-export const runtime = "edge";
 import { NextResponse } from "next/server"
 import { getRequestContext } from "@cloudflare/next-on-pages"
 import { checkPermission } from "@/lib/auth"
 import { PERMISSIONS } from "@/lib/permissions"
 import { EMAIL_CONFIG } from "@/config"
-
-export const runtime = "edge"
 
 interface EmailServiceConfig {
   enabled: boolean
