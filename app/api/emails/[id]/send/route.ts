@@ -6,8 +6,6 @@ import { eq } from "drizzle-orm"
 import { getRequestContext } from "@cloudflare/next-on-pages"
 import { checkSendPermission } from "@/lib/send-permissions"
 
-export const runtime = "edge"
-
 interface SendEmailRequest {
   to: string
   subject: string
