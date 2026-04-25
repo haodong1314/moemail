@@ -25,14 +25,19 @@ const nextConfig = {
       }
     ],
   },
+  // 确保输出目录正确
+  output: 'export',
+  // 禁用静态导出的 trailingSlash
+  trailingSlash: false,
 };
 
-const withPWAConfigured = withPWA({
+// 只在非生产环境使用 PWA
+const withPWAConfigured = process.env.NODE_ENV !== 'production' ? withPWA({
   dest: 'public',
   register: true,
   skipWaiting: true,
   disable: process.env.NODE_ENV === 'development',
-}) as any
+}) as any : (config: any) => config
 
 const configWithPWA = withPWAConfigured(nextConfig as any) as any
 
